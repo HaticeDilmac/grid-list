@@ -1,26 +1,31 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <table v-if="filteredData.length">
+      <!-- ... Tablo başlıkları ... -->
+      <tbody>
+        <tr v-for="entry in filteredData" :key="entry">
+          <td v-for="key in columns" :key="key">
+            {{ entry[key] }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p v-else>No matches found.</p>
+  </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+import { ref, computed, defineProps } from 'vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+const props = defineProps({
+  data: Array,
+  columns: Array,
+  filterKey: String
+})
+
+// ... Diğer kodlar ...
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+/* ... Stil kuralları ... */
 </style>
